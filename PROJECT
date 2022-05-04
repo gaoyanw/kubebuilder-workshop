@@ -1,0 +1,6 @@
+domain: example.com
+layout:
+- go.kubebuilder.io/v3
+projectName: kubebuilder-workshop
+repo: github.com/pwittrock/kubebuilder-workshop
+version: "3"
