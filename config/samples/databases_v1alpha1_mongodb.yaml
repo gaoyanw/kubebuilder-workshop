@@ -1,0 +1,6 @@
+apiVersion: databases.example.com/v1alpha1
+kind: MongoDB
+metadata:
+  name: mongodb-sample
+spec:
+  # TODO(user): Add fields here
