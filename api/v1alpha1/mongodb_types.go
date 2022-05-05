@@ -56,6 +56,9 @@ type MongoDB struct {
 
 // MongoDBList contains a list of MongoDB
 type MongoDBList struct {
+	//TypeMeta contains metadata about the API itself - such as Group, Version, Kind.
+	//ObjectMeta contains metadata about the specific object instance - such as the name,
+	//namespace, labels and annotations.
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []MongoDB `json:"items"`
