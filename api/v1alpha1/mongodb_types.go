@@ -17,6 +17,10 @@ limitations under the License.
 package v1alpha1
 
 import (
+	//apps/v1. apps is the most common API group in Kubernetes,
+	// https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.24/#-strong-api-groups-strong-
+	appsv1 "k8s.io/api/apps/v1"
+	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -25,17 +29,25 @@ import (
 
 // MongoDBSpec defines the desired state of MongoDB
 type MongoDBSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// replicas is the number of MongoDB replicas
+	// +kubebuilder:validation:Minimum=0
+	// +optional
+	Replicas *int32 `json:"replicas,omitempty"`
 
-	// Foo is an example field of MongoDB. Edit mongodb_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// storage is the volume size for each instance
+	// +optional
+	Storage *string `json:"storage,omitempty"`
 }
 
 // MongoDBStatus defines the observed state of MongoDB
 type MongoDBStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// statefulSetStatus contains the status of the StatefulSet managed by MongoDB
+	StatefulSetStatus appsv1.StatefulSetStatus `json:"statefulSetStatus,omitempty"`
+
+	// serviceStatus contains the status of the Service managed by MongoDB
+	ServiceStatus v1.ServiceStatus `json:"serviceStatus,omitempty"`
+
+	ClusterIP string `json:"clusterIP,omitempty"`
 }
 
 //+kubebuilder:object:root=true
