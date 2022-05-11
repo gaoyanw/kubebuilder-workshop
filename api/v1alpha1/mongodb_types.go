@@ -40,6 +40,11 @@ type MongoDBSpec struct {
 }
 
 // MongoDBStatus defines the observed state of MongoDB
+// +kubebuilder:printcolumn:name="storage",type="string",JSONPath=".spec.storage",format="byte"
+// +kubebuilder:printcolumn:name="replicas",type="integer",JSONPath=".spec.replicas",format="int32"
+// +kubebuilder:printcolumn:name="ready replicas",type="integer",JSONPath=".status.statefulSetStatus.readyReplicas",format="int32"
+// +kubebuilder:printcolumn:name="current replicas",type="integer",JSONPath=".status.statefulSetStatus.currentReplicas",format="int32"
+// +kubebuilder:printcolumn:name="cluster-ip",type="string",JSONPath=".status.clusterIP",format="byte"
 type MongoDBStatus struct {
 	// statefulSetStatus contains the status of the StatefulSet managed by MongoDB
 	StatefulSetStatus appsv1.StatefulSetStatus `json:"statefulSetStatus,omitempty"`
